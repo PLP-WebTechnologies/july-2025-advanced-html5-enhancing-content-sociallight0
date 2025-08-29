@@ -1,1 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechLearn Academy - Course Enrollment</title>
+    <style>
+        /* Enhanced styling for better presentation */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        main {
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: #f8f9fa;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        /* Lists styling */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            background: white;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .course-list li {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .course-list li:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Table styling */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .schedule-table th {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .schedule-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .schedule-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .schedule-table tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* Media styling */
+        .media-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+        
+        .campus-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .media-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        audio, video {
+            width: 100%;
+            border-radius: 5px;
+        }
+        
+        /* Form styling */
+        .enrollment-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        fieldset {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+        }
+        
+        legend {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        input:invalid {
+            border-color: #e74c3c;
+        }
+        
+        input:valid {
+            border-color: #27ae60;
+        }
+        
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox-item:hover, .radio-item:hover {
+            border-color: #3498db;
+            background: #f0f8ff;
+        }
+        
+        .checkbox-item input, .radio-item input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .reset-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        
+        .form-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group, .radio-group {
+                flex-direction: column;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>🎓 TechLearn Academy</h1>
+            <p>Empowering Future Technology Leaders</p>
+        </header>
 
+        <main>
+            <!-- Academy Features Section with Lists -->
+            <section>
+                <h2>🌟 Why Choose TechLearn Academy?</h2>
+                <div class="media-container">
+                    <div>
+                        <h3>Academy Features</h3>
+                        <ul class="feature-list">
+                            <li><strong>Expert Instructors:</strong> Learn from industry professionals with 10+ years experience</li>
+                            <li><strong>Hands-on Projects:</strong> Build real-world applications and portfolios</li>
+                            <li><strong>Career Support:</strong> Job placement assistance and interview preparation</li>
+                            <li><strong>Flexible Learning:</strong> Online, offline, and hybrid learning options</li>
+                            <li><strong>Lifetime Access:</strong> Continue learning with updated course materials</li>
+                            <li><strong>Community Support:</strong> Join our active student and alumni network</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>Available Courses</h3>
+                        <ol class="course-list">
+                            <li>
+                                <strong>💻 Full Stack Development</strong>
+                                <p>Master HTML, CSS, JavaScript, React, Node.js, and databases</p>
+                                <small>Duration: 12 weeks</small>
+                            </li>
+                            <li>
+                                <strong>🤖 Machine Learning</strong>
+                                <p>Learn Python, TensorFlow, and AI model development</p>
+                                <small>Duration: 16 weeks</small>
+                            </li>
+                            <li>
+                                <strong>📱 Mobile App Development</strong>
+                                <p>Create iOS and Android apps with React Native</p>
+                                <small>Duration: 10 weeks</small>
+                            </li>
+                            <li>
+                                <strong>☁️ Cloud Computing</strong>
+                                <p>Master AWS, Azure, and cloud architecture</p>
+                                <small>Duration: 8 weeks</small>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule Table Section -->
+            <section>
+                <h2>📅 Class Schedules & Pricing</h2>
+                <table class="schedule-table">
+                    <caption>Fall 2024 Course Schedule and Pricing Information</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Schedule</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Format</th>
+                            <th scope="col">Price (USD)</th>
+                            <th scope="col">Next Start Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Full Stack Development</th>
+                            <td>Mon, Wed, Fri - 6:00 PM to 9:00 PM</td>
+                            <td>12 weeks</td>
+                            <td>Hybrid</td>
+                            <td>$2,999</td>
+                            <td>September 15, 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Machine Learning</th>
+                            <td>Tue, Thu - 7:00 PM to 10:00 PM</td>
+                            <td>16 weeks</td>
+                            <td>Online</td>
+                            <td>$3,499</td>
+                            <td>September 20, 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Mobile App Development</th>
+                            <td>Sat, Sun - 10:00 AM to 2:00 PM</td>
+                            <td>10 weeks</td>
+                            <td>In-Person</td>
+                            <td>$2,599</td>
+                            <td>October 5, 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cloud Computing</th>
+                            <td>Mon, Wed - 8:00 PM to 10:00 PM</td>
+                            <td>8 weeks</td>
+                            <td>Online</td>
+                            <td>$1,899</td>
+                            <td>September 25, 2024</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Data Science Bootcamp</th>
+                            <td>Full-time: Mon-Fri 9:00 AM to 5:00 PM</td>
+                            <td>20 weeks</td>
+                            <td>Hybrid</td>
+                            <td>$4,999</td>
+                            <td>October 15, 2024</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6"><strong>Note:</strong> All prices include course materials, project hosting, and career support services.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+
+            <!-- Media Content Section -->
+            <section>
+                <h2>🎬 Campus & Learning Experience</h2>
+                <div class="media-container">
+                    <!-- Image with proper semantic markup -->
+                    <figure class="media-item">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Students collaborating in modern computer lab with multiple monitors and latest technology" 
+                             class="campus-image">
+                        <figcaption><strong>State-of-the-art Learning Facilities</strong> - Modern computer labs equipped with the latest technology</figcaption>
+                    </figure>
+
+                    <!-- Audio content -->
+                    <div class="media-item">
+                        <h3>🎙️ Welcome Message from Our Director</h3>
+                        <audio controls preload="metadata">
+                            <source src="#" type="audio/mpeg">
+                            <source src="#" type="audio/ogg">
+                            <p>Your browser doesn't support audio. You can <a href="#" download>download the audio file</a> instead.</p>
+                        </audio>
+                        <p><em>Listen to our academy director discuss our mission and vision for transforming tech education.</em></p>
+                    </div>
+
+                    <!-- Video content -->
+                    <div class="media-item">
+                        <h3>📹 Virtual Campus Tour</h3>
+                        <video controls width="100%" height="200" poster="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+                            <source src="#" type="video/mp4">
+                            <source src="#" type="video/webm">
+                            <track kind="subtitles" src="#" srclang="en" label="English" default>
+                            <track kind="subtitles" src="#" srclang="es" label="Spanish">
+                            <p>Your browser doesn't support video. You can <a href="#" download>download the video file</a> instead.</p>
+                        </video>
+                        <p><em>Take a virtual tour of our campus facilities, labs, and student spaces.</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Enrollment Form -->
+            <section>
+                <h2>📝 Course Enrollment Application</h2>
+                <div class="form-note">
+                    <strong>📋 Application Instructions:</strong> Please complete all required fields marked with an asterisk (*). 
+                    Your application will be reviewed within 48 hours, and you'll receive a confirmation email.
+                </div>
+                
+                <form class="enrollment-form" action="#" method="post" enctype="multipart/form-data" novalidate>
+                    
+                    <!-- Personal Information Fieldset -->
+                    <fieldset>
+                        <legend>👤 Personal Information</legend>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" 
+                                       id="firstName" 
+                                       name="firstName" 
+                                       required 
+                                       minlength="2" 
+                                       maxlength="50"
+                                       pattern="[A-Za-z\s\-']+"
+                                       placeholder="Enter your first name"
+                                       autocomplete="given-name"
+                                       title="Only letters, spaces, hyphens, and apostrophes allowed">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" 
+                                       id="lastName" 
+                                       name="lastName" 
+                                       required 
+                                       minlength="2" 
+                                       maxlength="50"
+                                       pattern="[A-Za-z\s\-']+"
+                                       placeholder="Enter your last name"
+                                       autocomplete="family-name"
+                                       title="Only letters, spaces, hyphens, and apostrophes allowed">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" 
+                                       id="email" 
+                                       name="email" 
+                                       required 
+                                       placeholder="your.email@example.com"
+                                       autocomplete="email"
+                                       title="Please enter a valid email address">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" 
+                                       id="phone" 
+                                       name="phone" 
+                                       required 
+                                       pattern="[\+]?[1-9]?[\d\s\-\(\)]{10,15}"
+                                       placeholder="+1 (555) 123-4567"
+                                       autocomplete="tel"
+                                       title="Please enter a valid phone number (10-15 digits)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth *</label>
+                                <input type="date" 
+                                       id="dateOfBirth" 
+                                       name="dateOfBirth" 
+                                       required 
+                                       min="1950-01-01" 
+                                       max="2010-12-31"
+                                       autocomplete="bday">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender" autocomplete="sex">
+                                    <option value="">Select your gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="non-binary">Non-binary</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Address Information -->
+                    <fieldset>
+                        <legend>📍 Address Information</legend>
+                        
+                        <div class="form-group">
+                            <label for="address">Street Address *</label>
+                            <input type="text" 
+                                   id="address" 
+                                   name="address" 
+                                   required 
+                                   minlength="5" 
+                                   maxlength="100"
+                                   placeholder="123 Main Street, Apt 4B"
+                                   autocomplete="street-address">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" 
+                                       id="city" 
+                                       name="city" 
+                                       required 
+                                       minlength="2" 
+                                       maxlength="50"
+                                       pattern="[A-Za-z\s\-']+"
+                                       placeholder="Enter your city"
+                                       autocomplete="address-level2">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="state">State/Province *</label>
+                                <input type="text" 
+                                       id="state" 
+                                       name="state" 
+                                       required 
+                                       minlength="2" 
+                                       maxlength="50"
+                                       placeholder="Enter your state"
+                                       autocomplete="address-level1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="zipCode">ZIP/Postal Code *</label>
+                                <input type="text" 
+                                       id="zipCode" 
+                                       name="zipCode" 
+                                       required 
+                                       pattern="[A-Za-z0-9\s\-]{3,10}"
+                                       placeholder="12345 or A1B 2C3"
+                                       autocomplete="postal-code">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="country">Country *</label>
+                            <select id="country" name="country" required autocomplete="country">
+                                <option value="">Select your country</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="JP">Japan</option>
+                                <option value="IN">India</option>
+                                <option value="BR">Brazil</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <!-- Course Selection -->
+                    <fieldset>
+                        <legend>📚 Course Selection</legend>
+                        
+                        <div class="form-group">
+                            <label for="primaryCourse">Primary Course *</label>
+                            <select id="primaryCourse" name="primaryCourse" required>
+                                <option value="">Choose your primary course</option>
+                                <option value="fullstack">Full Stack Development - $2,999</option>
+                                <option value="ml">Machine Learning - $3,499</option>
+                                <option value="mobile">Mobile App Development - $2,599</option>
+                                <option value="cloud">Cloud Computing - $1,899</option>
+                                <option value="datascience">Data Science Bootcamp - $4,999</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="startDate">Preferred Start Date *</label>
+                            <input type="date" 
+                                   id="startDate" 
+                                   name="startDate" 
+                                   required 
+                                   min="2024-09-01" 
+                                   max="2025-06-30">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Learning Format *</label>
+                            <div class="radio-group" role="radiogroup" aria-labelledby="learningFormat">
+                                <div class="radio-item">
+                                    <input type="radio" id="online" name="learningFormat" value="online" required>
+                                    <label for="online">🌐 Online Only</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="inPerson" name="learningFormat" value="in-person" required>
+                                    <label for="inPerson">🏢 In-Person Only</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="hybrid" name="learningFormat" value="hybrid" required>
+                                    <label for="hybrid">🔄 Hybrid (Online + In-Person)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Additional Services (Optional)</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="careerSupport" name="additionalServices" value="career-support">
+                                    <label for="careerSupport">💼 Career Placement Support (+$299)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="mentorship" name="additionalServices" value="mentorship">
+                                    <label for="mentorship">👨‍🏫 1-on-1 Mentorship (+$499)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="certification" name="additionalServices" value="certification">
+                                    <label for="certification">🏆 Industry Certification Prep (+$199)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="portfolio" name="additionalServices" value="portfolio">
+                                    <label for="portfolio">💻 Portfolio Development (+$299)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Educational Background -->
+                    <fieldset>
+                        <legend>🎓 Educational & Professional Background</legend>
+                        
+                        <div class="form-group">
+                            <label for="education">Highest Education Level *</label>
+                            <select id="education" name="education" required>
+                                <option value="">Select your education level</option>
+                                <option value="high-school">High School Diploma/GED</option>
+                                <option value="associate">Associate Degree</option>
+                                <option value="bachelor">Bachelor's Degree</option>
+                                <option value="master">Master's Degree</option>
+                                <option value="doctorate">Doctorate/PhD</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="experience">Programming Experience (Years)</label>
+                                <input type="number" 
+                                       id="experience" 
+                                       name="experience" 
+                                       min="0" 
+                                       max="50" 
+                                       step="0.5"
+                                       placeholder="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="currentRole">Current Job Role</label>
+                                <input type="text" 
+                                       id="currentRole" 
+                                       name="currentRole" 
+                                       maxlength="100"
+                                       placeholder="e.g., Software Developer, Student, etc."
+                                       autocomplete="organization-title">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="motivation">Why do you want to join TechLearn Academy? *</label>
+                            <textarea id="motivation" 
+                                      name="motivation" 
+                                      required 
+                                      minlength="50" 
+                                      maxlength="500"
+                                      rows="4" 
+                                      placeholder="Tell us about your goals and motivation for joining our programs (minimum 50 characters)"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <!-- Technical Information -->
+                    <fieldset>
+                        <legend>💻 Technical Information</legend>
+                        
+                        <div class="form-group">
+                            <label for="portfolio">Portfolio/GitHub URL</label>
+                            <input type="url" 
+                                   id="portfolio" 
+                                   name="portfolio" 
+                                   placeholder="https://github.com/yourusername or https://yourportfolio.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resume">Upload Resume (PDF only, max 5MB)</label>
+                            <input type="file" 
+                                   id="resume" 
+                                   name="resume" 
+                                   accept=".pdf"
+                                   title="Please upload your resume in PDF format">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="referralSource">How did you hear about us?</label>
+                            <select id="referralSource" name="referralSource">
